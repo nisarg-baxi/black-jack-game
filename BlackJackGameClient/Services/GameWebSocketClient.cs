@@ -34,7 +34,7 @@ namespace BlackJackGameClient.Services
 
             while (_socket.State == WebSocketState.Open)
             {
-                Console.Write("➤ Enter command (Hit / Stand): ");
+                Console.Write("➤ Enter command (Hit / Stand / Exit): ");
                 var input = Console.ReadLine()?.ToLowerInvariant();
 
                 if (input == "exit") break;

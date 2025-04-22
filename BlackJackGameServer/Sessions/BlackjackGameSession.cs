@@ -38,61 +38,13 @@ namespace BlackJackGameServer.Sessions
             _playerHand.Add(Deal());
 
             _dealerHand.Add(Deal());
-            _dealerHand.Add(Deal());
 
             var playerScore = Helper.CalculateScore(_playerHand);
-            var dealerScore = Helper.CalculateScore(new List<Card> { _dealerHand[0] }); // hide dealer's second card
-
+        
             await _notifier.NotifyAsync(player.Id, $"Your cards: {Helper.FormatHand(_playerHand)} [Score: {playerScore}]");
             await _notifier.NotifyAsync(player.Id, $"Dealer shows: {_dealerHand[0]}");
 
-            string? action;
-            do
-            {
-                await _notifier.NotifyAsync(player.Id, "Hit or Stand? (H/S)");
-                action = Console.ReadLine()?.ToUpperInvariant();
-
-                if (action == "H")
-                {
-                    var card = Deal();
-                    _playerHand.Add(Deal());
-                    playerScore = Helper.CalculateScore(_playerHand);
-                    await _notifier.NotifyAsync(player.Id, $"You drew: {card} [Score: {playerScore}]");
-                }
-
-            } while (action == "H" && playerScore < 21);
-
-            if (playerScore > 21)
-            {
-                await _notifier.NotifyAsync(player.Id, $"💥 You busted! Final score: {playerScore}");
-                return;
-            }
-
-            dealerScore = Helper.CalculateScore(_dealerHand);
-            while (dealerScore < 17)
-            {
-                var card = Deal();
-                _dealerHand.Add(card);
-                dealerScore = Helper.CalculateScore(_dealerHand);
-            }
-
-            await _notifier.NotifyAsync(player.Id, $"Dealer cards: {Helper.FormatHand(_dealerHand)} [Score: {dealerScore}]");
-
-            string result;
-            if (dealerScore > 21 || playerScore > dealerScore)
-            {
-                result = "🎉 You win!";
-            }
-            else if (playerScore == dealerScore)
-            {
-                result = "🤝 Push! It's a tie.";
-            }
-            else
-            {
-                result = "🧊 Dealer wins.";
-            }
-
-            await _notifier.NotifyAsync(player.Id, result);
+            await _notifier.NotifyAsync(player.Id, "Hit or Stand?");
             await Task.Delay(500); // simulate async work
         }
 
