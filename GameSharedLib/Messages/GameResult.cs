@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace GameSharedLib.Messages;
 
-namespace GameSharedLib.Messages
+public class GameResult
 {
-    internal class GameResult
-    {
-    }
+    public string Result { get; set; } = "InProgress"; // "Win", "Lose", "Tie", etc.
+    public int PlayerScore { get; set; }
+    public int DealerScore { get; set; }
 }

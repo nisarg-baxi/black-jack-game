@@ -54,3 +54,4 @@ TestResult.xml
 nunit-*.xml
 /.vs/BlackJackGame/v17
 /.vs/BlackJackGame/FileContentIndex
+/.vs

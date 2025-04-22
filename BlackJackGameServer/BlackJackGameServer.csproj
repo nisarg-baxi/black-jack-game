@@ -8,10 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Networking\" />
     <Folder Include="Interface\" />
-    <Folder Include="Utils\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GameSharedLib" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

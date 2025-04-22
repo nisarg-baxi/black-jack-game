@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GameSharedLib.Messages
+namespace GameSharedLib.Messages;
+
+public class GameEvent
 {
-    internal class GameEvent
-    {
-    }
+    public required string PlayerId { get; set; }
+    public required string EventType { get; set; } // e.g., "CardDealt", "GameOver"
+    public object? Payload { get; set; }
 }

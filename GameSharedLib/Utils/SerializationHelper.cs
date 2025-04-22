@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
-namespace GameSharedLib.Utils
+namespace GameSharedLib.Utils;
+
+public static class SerializationHelper
 {
-    internal class SerializationHelper
-    {
-    }
+    public static string ToJson<T>(T obj) =>
+        JsonSerializer.Serialize(obj);
+
+    public static T? FromJson<T>(string json) =>
+        JsonSerializer.Deserialize<T>(json);
 }
