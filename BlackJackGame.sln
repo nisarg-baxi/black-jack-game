@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSharedLib", "GameShared
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackGame.Tests", "BlackJackGame.Tests\BlackJackGame.Tests.csproj", "{BE23D22F-402C-442E-8441-C61645A1E6EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameAPIClient", "GameAPIClient\GameAPIClient.csproj", "{9004B9BB-CD3D-48EE-8C50-7EFC2CFEE443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BE23D22F-402C-442E-8441-C61645A1E6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE23D22F-402C-442E-8441-C61645A1E6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE23D22F-402C-442E-8441-C61645A1E6EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9004B9BB-CD3D-48EE-8C50-7EFC2CFEE443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9004B9BB-CD3D-48EE-8C50-7EFC2CFEE443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9004B9BB-CD3D-48EE-8C50-7EFC2CFEE443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9004B9BB-CD3D-48EE-8C50-7EFC2CFEE443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,7 +32,7 @@ var server = new WebSocketGameServer(handler);
 
 // ✅ Start WebSocket server in background
 var port = Environment.GetEnvironmentVariable("GAME_SERVER_PORT") ?? "5000";
-var serverUrl = $"http://localhost:{port}/ws/";
+var serverUrl = $"ws://localhost:{port}/ws/";
 _ = Task.Run(() => server.StartAsync(serverUrl, cts.Token));
 
 

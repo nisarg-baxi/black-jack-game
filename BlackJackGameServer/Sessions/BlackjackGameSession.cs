@@ -2,11 +2,9 @@
 using GameSharedLib.Contracts;
 using GameSharedLib.Messages;
 using GameSharedLib.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Numerics;
+
 
 namespace BlackJackGameServer.Sessions
 {
@@ -107,6 +105,54 @@ namespace BlackJackGameServer.Sessions
                 result = "🧊 Dealer wins.";
 
             await _notifier.NotifyAsync(Player.Id, result);
+
+            // --- New Code to Record the Session Result ---
+            int coinsChange = 0;
+            bool won = false;
+
+            // You can tune these values however you want:
+            if (result.Contains("You win"))
+            {
+                coinsChange = 500; // Example reward
+                won = true;
+                Player.AddCoins(coinsChange);
+            }
+            else if (result.Contains("Dealer wins"))
+            {
+                coinsChange = -200; // Example loss
+                won = false;
+                Player.SpendCoins(200); // Lose 200 coins if lost
+            }
+            else
+            {
+                coinsChange = 0; // Tie
+            }
+            string sessionId = Guid.NewGuid().ToString();
+            // Now record the game result
+            Player.SessionHistory.Add(new GameSessionResult
+            {
+                SessionId = sessionId, // or reuse your matchmaking SessionId if available
+                Won = won,
+                CoinsChange = coinsChange,
+                PlayedAt = DateTime.UtcNow
+            });
+
+            // Add this in class (or inject it if scaling up)
+            HttpClient _httpClient = new();
+
+            string apiBaseUrl = "http://localhost:5053"; // Your API server base address
+
+            await _httpClient.PostAsJsonAsync($"{apiBaseUrl}/api/sessionhistory/record", new
+            {
+                PlayerId = Player.Id,
+                SessionId = sessionId, // reuse your matchmaking sessionId if available
+                Won = won,
+                CoinsChange = coinsChange
+            });
+
+            //// Save updated player state
+            //_playerService.UpdatePlayer(player);
+
         }
 
         private async Task NotifyGameState(string prompt)
